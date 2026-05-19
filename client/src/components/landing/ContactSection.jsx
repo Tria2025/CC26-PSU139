@@ -170,13 +170,8 @@ export function ContactSection() {
         </h2>
 
         <p className="mt-5 text-slate-600 text-lg max-w-3xl mx-auto leading-relaxed">
-          Apakah Anda memiliki
-          pertanyaan atau masukan
-          terkait platform CareerPath
-          AI? Tim kami siap membantu
-          Anda dengan layanan
-          profesional dan respons
-          cepat.
+          Apakah Anda memiliki pertanyaan atau masukan terkait platform CareerPath AI? Tim kami siap membantu
+          Anda dengan layanan profesional dan respons cepat.
         </p>
       </div>
 
@@ -207,10 +202,10 @@ export function ContactSection() {
                   </h4>
 
                   <a
-                    href="mailto:careerpathai@gmail.com"
+                    href="mailto:team.careerpathai@gmail.com"
                     className="text-slate-600 mt-1 hover:text-blue-600 transition"
                   >
-                    careerpathai@gmail.com
+                    team.careerpathai@gmail.com
                   </a>
                 </div>
               </div>
@@ -230,7 +225,7 @@ export function ContactSection() {
                     href="tel:+6281234567890"
                     className="text-slate-600 mt-1 hover:text-blue-600 transition"
                   >
-                    +62 812-3456-7890
+                    +62 857-5535-6743
                   </a>
                 </div>
               </div>
@@ -247,7 +242,7 @@ export function ContactSection() {
                   </h4>
 
                   <p className="text-slate-600 mt-1">
-                    Jakarta, Indonesia
+                    Kediri, Indonesia
                   </p>
                 </div>
               </div>
@@ -262,7 +257,7 @@ export function ContactSection() {
               <div className="flex items-center gap-4">
                 {/* YOUTUBE */}
                 <a
-                  href="https://youtube.com"
+                  href="http://www.youtube.com/@CareerPath-AI"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="YouTube"
@@ -273,7 +268,7 @@ export function ContactSection() {
 
                 {/* INSTAGRAM */}
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/careerpath_ai?igsh=MWZuenBubXA1NzZ6OA=="
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
