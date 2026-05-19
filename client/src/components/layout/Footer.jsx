@@ -35,12 +35,12 @@ export function Footer() {
 
   return (
     <footer className="bg-slate-900 text-white mt-20">
-      <div className="container-custom py-14">
+      <div className="container-custom py-14 max-w-7xl mx-auto">
 
-        <div className="grid md:grid-cols-12 gap-10">
+        <div className="grid md:grid-cols-12 gap-8 lg:gap-12">
 
           {/* Brand */}
-          <div className="md:col-span-5 pr-8">
+          <div className="md:col-span-4 lg:pr-6">
 
             {/* Logo + Title */}
             <div className="flex items-center gap-3">
@@ -59,15 +59,14 @@ export function Footer() {
 
             {/* Short Description */}
             <p className="mt-5 text-slate-300 leading-relaxed max-w-sm">
-              Platform AI untuk rekomendasi karier
-              modern berdasarkan CV dan skill.
+              Platform AI untuk rekomendasi karier modern berdasarkan CV dan skill.
             </p>
 
             {/* Social Media */}
             <div className="flex items-center gap-4 mt-6">
 
               <a
-                href="https://youtube.com"
+                href="http://www.youtube.com/@CareerPath-AI"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center hover:bg-red-600 transition-all duration-300 hover:scale-110"
@@ -77,7 +76,7 @@ export function Footer() {
               </a>
 
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/careerpath_ai?igsh=MWZuenBubXA1NzZ6OA=="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center hover:bg-pink-600 transition-all duration-300 hover:scale-110"
@@ -167,42 +166,57 @@ export function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="md:col-span-2 px-4">
-            <h3 className="text-xl font-semibold mb-4">
+          <div className="md:col-span-3 px-2">
+            <h3 className="text-xl font-semibold mb-5">
               Kontak
             </h3>
 
-            <ul className="space-y-3 text-slate-300">
+            <ul className="space-y-4 text-slate-300 leading-relaxed">
               <li>
-                Email:
-                careerpathai@gmail.com
+                <span className="font-medium text-white">
+                  Email:
+                </span>
+                <br />
+                <span className="break-all">
+                  team.careerpathai@gmail.com
+                </span>
               </li>
 
               <li>
-                Telp:
+                <span className="font-medium text-white">
+                  Telp:
+                </span>
+                <br />
                 (021) 1234-5678
               </li>
 
               <li>
-                WhatsApp:
-                +62 812-3456-7890
+                <span className="font-medium text-white">
+                  WhatsApp:
+                </span>
+                <br />
+                +62 857-5535-6743
               </li>
             </ul>
           </div>
 
           {/* Address */}
-          <div className="md:col-span-3 pl-6">
-            <h3 className="text-xl font-semibold mb-4">
+          <div className="md:col-span-3 lg:pl-4">
+            <h3 className="text-xl font-semibold mb-5">
               Alamat
             </h3>
 
-            <ul className="space-y-3 text-slate-300">
+            <ul className="space-y-3 text-slate-300 leading-relaxed">
               <li>
-                Jl. Teknologi AI No. 139
+                Jl. Ahmad Dahlan No. 76
               </li>
 
               <li>
-                Jakarta Selatan, 12345
+                Mojoroto, Kec. Mojoroto
+              </li>
+
+              <li>
+                Kota Kediri, Jawa Timur 64112
               </li>
 
               <li>
@@ -221,7 +235,7 @@ export function Footer() {
             All rights reserved.
           </p>
 
-          <div className="flex gap-6">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
 
             <button className="hover:text-white transition">
               Perusahaan
