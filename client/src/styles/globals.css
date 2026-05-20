@@ -14,8 +14,130 @@ html {
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: #f8fafc;
   color: #0f172a;
+  overflow-x: hidden;
+
+  background-color: #f8fbff;
+
+  /* SOFT AI BACKGROUND */
+  background-image:
+
+    /* Tiny Noise / Semut */
+    radial-gradient(
+      rgba(59, 130, 246, 0.10) 0.8px,
+      transparent 0.8px
+    ),
+
+    radial-gradient(
+      rgba(255, 255, 255, 0.9) 0.5px,
+      transparent 0.5px
+    ),
+
+    /* Soft Glow */
+    radial-gradient(
+      circle at top left,
+      rgba(147, 197, 253, 0.20),
+      transparent 35%
+    ),
+
+    radial-gradient(
+      circle at bottom right,
+      rgba(191, 219, 254, 0.25),
+      transparent 40%
+    );
+
+  background-size:
+    14px 14px,
+    18px 18px,
+    auto,
+    auto;
+
+  background-position:
+    0 0,
+    7px 7px,
+    center,
+    center;
+}
+
+/* Floating Glow Effect */
+body::before {
+  content: '';
+
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(96, 165, 250, 0.18),
+      transparent 65%
+    );
+
+  width: 600px;
+  height: 600px;
+
+  top: -200px;
+  right: -120px;
+
+  filter: blur(120px);
+
+  z-index: -1;
+
+  animation: floatingGlow 16s ease-in-out infinite;
+}
+
+/* Secondary Glow */
+body::after {
+  content: '';
+
+  position: fixed;
+
+  width: 500px;
+  height: 500px;
+
+  bottom: -180px;
+  left: -120px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(191, 219, 254, 0.20),
+      transparent 70%
+    );
+
+  filter: blur(120px);
+
+  z-index: -1;
+
+  animation: floatingGlow2 18s ease-in-out infinite;
+}
+
+@keyframes floatingGlow {
+  0% {
+    transform: translate(0px, 0px);
+  }
+
+  50% {
+    transform: translate(-30px, 25px);
+  }
+
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes floatingGlow2 {
+  0% {
+    transform: translate(0px, 0px);
+  }
+
+  50% {
+    transform: translate(25px, -20px);
+  }
+
+  100% {
+    transform: translate(0px, 0px);
+  }
 }
 
 /* =========================
@@ -82,6 +204,99 @@ body {
       focus-visible:outline-none
       focus-visible:ring-4
       focus-visible:ring-blue-200;
+  }
+
+  /* =========================
+    Hero Primary Button
+  ========================= */
+  .hero-primary-button {
+    @apply
+      relative
+      overflow-hidden
+      inline-flex
+      items-center
+      justify-center
+      px-7
+      py-3
+      rounded-2xl
+      bg-blue-600
+      text-white
+      font-medium
+      shadow-lg
+      shadow-blue-200
+      transition-all
+      duration-300
+      hover:-translate-y-1
+      hover:shadow-2xl
+      hover:shadow-blue-300/40
+      active:scale-95
+      focus-visible:outline-none
+      focus-visible:ring-4
+      focus-visible:ring-blue-300;
+  }
+
+  /* Glow Overlay */
+  .hero-primary-button::before {
+    content: '';
+
+    @apply
+      absolute
+      inset-0
+      opacity-0
+      transition-opacity
+      duration-300;
+
+    background:
+      linear-gradient(
+        to right,
+        rgb(59 130 246),
+        rgb(34 211 238)
+      );
+  }
+
+  .hero-primary-button:hover::before {
+    opacity: 1;
+  }
+
+  .hero-primary-button span {
+    @apply relative z-10;
+  }
+
+  /* =========================
+    Hero Secondary Button
+  ========================= */
+  .hero-secondary-button {
+    @apply
+      inline-flex
+      items-center
+      justify-center
+      px-7
+      py-3
+      rounded-2xl
+      border
+      border-slate-200
+      bg-white/80
+      backdrop-blur-xl
+      text-slate-700
+      font-medium
+      transition-all
+      duration-300
+      hover:-translate-y-1
+      hover:border-blue-200
+      hover:bg-blue-50
+      hover:text-blue-700
+      hover:shadow-xl
+      active:scale-95
+      focus-visible:outline-none
+      focus-visible:ring-4
+      focus-visible:ring-blue-200;
+  }
+
+  .hero-secondary-button span {
+    @apply
+      transition-transform
+      duration-300
+      group-hover:translate-x-1;
   }
 
   /* =========================
@@ -210,5 +425,148 @@ body {
       focus-visible:outline-none
       focus-visible:ring-4
       focus-visible:ring-blue-200;
+  }
+
+  /* =========================
+    Team Card Animation
+  ========================= */
+  @keyframes teamCardEnter {
+    0% {
+      opacity: 0;
+      transform:
+        translateY(70px)
+        scale(0.9);
+      filter: blur(10px);
+    }
+
+    50% {
+      opacity: 1;
+      transform:
+        translateY(-8px)
+        scale(1.02);
+      filter: blur(0);
+    }
+
+    75% {
+      transform:
+        translateY(4px)
+        scale(0.99);
+    }
+
+    100% {
+      opacity: 1;
+      transform:
+        translateY(0)
+        scale(1);
+      filter: blur(0);
+    }
+  }
+
+  .animate-team-card {
+    animation:
+      teamCardEnter 1s
+      cubic-bezier(0.22, 1, 0.36, 1);
+
+    animation-fill-mode: both;
+
+    will-change:
+      transform,
+      opacity;
+  }
+
+  /* =========================
+    Heading Soft Animation
+  ========================= */
+  @keyframes bounceInSoft {
+    0% {
+      opacity: 0;
+      transform:
+        translateY(30px)
+        scale(0.92);
+      filter: blur(6px);
+    }
+
+    60% {
+      opacity: 1;
+      transform:
+        translateY(-6px)
+        scale(1.02);
+      filter: blur(0);
+    }
+
+    80% {
+      transform:
+        translateY(2px)
+        scale(0.99);
+    }
+
+    100% {
+      opacity: 1;
+      transform:
+        translateY(0)
+        scale(1);
+        filter: blur(0);
+    }
+  }
+
+  .animate-bounce-soft {
+    animation:
+      bounceInSoft 0.9s
+      cubic-bezier(0.22, 1, 0.36, 1);
+
+    animation-fill-mode: both;
+  }
+
+  /* =========================
+    Result Action Buttons
+  ========================= */
+  .result-primary-button {
+    @apply
+      inline-flex
+      items-center
+      justify-center
+      gap-2
+      rounded-2xl
+      bg-blue-600
+      px-6
+      py-3.5
+      text-sm
+      font-semibold
+      text-white
+      shadow-lg
+      shadow-blue-200
+      transition-all
+      duration-300
+      hover:-translate-y-1
+      hover:bg-blue-700
+      hover:shadow-2xl
+      hover:shadow-blue-300/40
+      active:scale-95;
+  }
+
+  .result-secondary-button {
+    @apply
+      inline-flex
+      items-center
+      justify-center
+      gap-2
+      rounded-2xl
+      border
+      border-slate-200
+      bg-white/80
+      px-6
+      py-3.5
+      text-sm
+      font-semibold
+      text-slate-700
+      backdrop-blur-xl
+      transition-all
+      duration-300
+      hover:-translate-y-1
+      hover:border-blue-200
+      hover:bg-blue-50
+      hover:text-blue-700
+      hover:shadow-xl
+      active:scale-95;
   }
 }

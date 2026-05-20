@@ -1,8 +1,4 @@
-import {
-  Sparkles,
-  Target,
-  TrendingUp,
-} from 'lucide-react';
+import { Sparkles, Target, TrendingUp } from 'lucide-react';
 
 const features = [
   {
@@ -24,10 +20,7 @@ const features = [
 
 export function AboutSection() {
   return (
-    <section
-      id="about"
-      className="container-custom py-20"
-    >
+    <section id="about" className="container-custom py-20">
       {/* Heading */}
       <div className="text-center mb-14">
 
@@ -59,14 +52,9 @@ export function AboutSection() {
               <span className="font-bold text-blue-600">
                 CareerPath AI
               </span>{' '}
-              adalah platform berbasis Artificial
-              Intelligence yang membantu pengguna
-              menemukan rekomendasi karier terbaik
-              melalui analisis CV secara cepat dan
-              akurat. Dirancang untuk membantu
-              generasi muda memahami potensi skill,
-              pengalaman, dan peluang kerja yang
-              sesuai di era digital modern.
+              adalah platform berbasis Artificial Intelligence yang membantu pengguna menemukan rekomendasi karier terbaik
+              melalui analisis CV secara cepat dan akurat. Dirancang untuk membantu generasi muda memahami potensi skill,
+              pengalaman, dan peluang kerja yang sesuai di era digital modern.
             </p>
 
             {/* Feature Cards */}
@@ -84,9 +72,7 @@ export function AboutSection() {
 
                     {/* Icon */}
                     <div className="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center mb-5 transition-all duration-300 group-hover:bg-blue-600">
-
                       <IconComponent className="w-7 h-7 text-blue-600 transition-all duration-300 group-hover:text-white" />
-
                     </div>
 
                     {/* Title */}
@@ -98,7 +84,6 @@ export function AboutSection() {
                     <p className="text-slate-600 leading-relaxed">
                       {feature.desc}
                     </p>
-
                   </div>
                 );
               })}

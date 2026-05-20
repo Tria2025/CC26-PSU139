@@ -1,80 +1,79 @@
-import {
-  useState,
-  useEffect,
-} from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 
-import {
-  useNavigate,
-  useLocation,
-} from 'react-router-dom';
-
-import {
-  Menu,
-  X,
-} from 'lucide-react';
+/* =========================
+   Data Navigasi
+========================= */
+const navLinks = [
+  { label: 'Home', type: 'section', target: 'home' },
+  { label: 'About', type: 'section', target: 'about' },
+  { label: 'Workflow', type: 'section', target: 'workflow' },
+  { label: 'Team', type: 'page', target: '/team' },
+  { label: 'Contact', type: 'page', target: '/contact' },
+];
 
 export function Navbar() {
   const navigate = useNavigate();
-
   const location = useLocation();
 
   const [mobileOpen, setMobileOpen] =
     useState(false);
 
   /* =========================
-     Handle Scroll Section
+     Handle Navigasi
   ========================= */
-  const handleNavigateSection = (
-    sectionId
-  ) => {
+  const handleNavigate = ({
+    type,
+    target,
+  }) => {
 
-    /* Jika bukan landing page */
-    if (location.pathname !== '/') {
+    /* Jika menuju section */
+    if (type === 'section') {
 
-      navigate('/', {
-        state: {
-          scrollTo: sectionId,
-        },
-      });
+      /* Jika bukan landing page */
+      if (location.pathname !== '/') {
 
-      setMobileOpen(false);
+        navigate('/', {
+          state: {
+            scrollTo: target,
+          },
+        });
 
-      return;
+      } else {
+
+        /* Scroll ke section */
+        document
+          .getElementById(target)
+          ?.scrollIntoView({
+            behavior: 'smooth',
+          });
+
+      }
+
+    } else {
+
+      /* Jika menuju halaman */
+      navigate(target);
+
     }
 
-    /* Scroll section */
-    const section =
-      document.getElementById(
-        sectionId
-      );
-
-    section?.scrollIntoView({
-      behavior: 'smooth',
-    });
-
+    /* Tutup mobile menu */
     setMobileOpen(false);
   };
 
   /* =========================
-     Handle Navigate Page
-  ========================= */
-  const handleNavigatePage = (
-    path
-  ) => {
-    navigate(path);
-
-    setMobileOpen(false);
-  };
-
-  /* =========================
-     Close Mobile Menu on Desktop
+     Tutup Mobile Menu
+     Saat Desktop
   ========================= */
   useEffect(() => {
 
     const handleResize = () => {
+
       if (window.innerWidth >= 768) {
         setMobileOpen(false);
       }
+
     };
 
     window.addEventListener(
@@ -82,225 +81,193 @@ export function Navbar() {
       handleResize
     );
 
-    return () => {
+    return () =>
       window.removeEventListener(
         'resize',
         handleResize
       );
-    };
+
   }, []);
 
   /* =========================
-     Lock Scroll When Menu Open
+     Lock Scroll Saat
+     Mobile Menu Aktif
   ========================= */
   useEffect(() => {
 
-    if (mobileOpen) {
-      document.body.style.overflow =
-        'hidden';
-    } else {
-      document.body.style.overflow =
-        'auto';
-    }
+    document.body.style.overflow =
+      mobileOpen ? 'hidden' : 'auto';
 
     return () => {
       document.body.style.overflow =
         'auto';
     };
-  }, [mobileOpen]);
 
-  /* =========================
-     Active Page Helper
-  ========================= */
-  const isActivePage = (path) =>
-    location.pathname === path;
+  }, [mobileOpen]);
 
   return (
     <>
       {/* =========================
           Navbar
       ========================= */}
-      <nav className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-slate-200">
+      <nav className="sticky top-0 z-50">
 
-        <div className="container-custom py-5 flex items-center justify-between">
+        <div className="container-custom pt-5">
 
-          {/* =========================
-              Logo
-          ========================= */}
-          <button
-            onClick={() =>
-              handleNavigateSection(
-                'home'
-              )
-            }
-            className="flex items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-            aria-label="Go to home"
-          >
+          <div className="flex items-center justify-between px-5 py-3 rounded-3xl border border-white/30 bg-white/65 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
 
-            <img
-              src="/careerpath-icon.png"
-              alt="CareerPath AI Logo"
-              className="w-11 h-11 object-contain"
-            />
-
-            <h1 className="text-2xl font-bold text-slate-800">
-              CareerPath AI
-            </h1>
-
-          </button>
-
-          {/* =========================
-              Desktop Navigation
-          ========================= */}
-          <div className="hidden md:flex items-center gap-8">
-
-            {/* Landing Links */}
+            {/* =========================
+                Logo
+            ========================= */}
             <button
               onClick={() =>
-                handleNavigateSection(
-                  'home'
-                )
+                handleNavigate({
+                  type: 'section',
+                  target: 'home',
+                })
               }
-              className="nav-link"
+              className="flex items-center gap-3"
             >
-              Home
+
+              <img
+                src="/careerpath-icon.png"
+                alt="CareerPath AI"
+                className="w-11 h-11 object-contain"
+              />
+              
+              <h1 className="text-2xl font-bold text-slate-900">
+                CareerPath AI
+              </h1>
+
             </button>
 
+            {/* =========================
+                Desktop Menu
+            ========================= */}
+            <div className="hidden md:flex items-center gap-2">
+
+              {navLinks.map((item, index) => {
+
+                const isActive =
+                  item.type === 'page' &&
+                  location.pathname === item.target;
+
+                return (
+                  <div
+                    key={item.label}
+                    className="flex items-center"
+                  >
+
+                    {/* Item Menu */}
+                    <button
+                      onClick={() =>
+                        handleNavigate(item)
+                      }
+                      className={`
+                        px-5 py-2 rounded-2xl text-sm font-medium transition-all duration-300
+                        ${
+                          isActive
+                            ? 'bg-blue-600 text-white shadow-lg shadow-blue-200'
+                            : 'text-slate-600 hover:bg-blue-50 hover:text-blue-600'
+                        }
+                      `}
+                    >
+                      {item.label}
+                    </button>
+
+                    {/* Divider setelah Workflow */}
+                    {index === 2 && (
+                      <div className="w-px h-6 bg-slate-300 mx-3" />
+                    )}
+
+                  </div>
+                );
+              })}
+
+              {/* Tombol CTA */}
+              <button
+                onClick={() =>
+                  navigate('/analyze')
+                }
+                className="ml-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold shadow-lg shadow-blue-300/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-cyan-300/40 active:scale-95"
+              >
+                Analyze CV
+              </button>
+
+            </div>
+
+            {/* =========================
+                Tombol Mobile
+            ========================= */}
             <button
               onClick={() =>
-                handleNavigateSection(
-                  'about'
+                setMobileOpen(
+                  !mobileOpen
                 )
               }
-              className="nav-link"
+              className="md:hidden p-2 rounded-xl hover:bg-slate-100 transition"
             >
-              About
-            </button>
 
-            <button
-              onClick={() =>
-                handleNavigateSection(
-                  'workflow'
-                )
-              }
-              className="nav-link"
-            >
-              Workflow
-            </button>
+              {mobileOpen ? (
+                <X className="w-6 h-6 text-slate-700" />
+              ) : (
+                <Menu className="w-6 h-6 text-slate-700" />
+              )}
 
-            {/* Divider */}
-            <div className="w-px h-6 bg-slate-300" />
-
-            {/* Team */}
-            <button
-              onClick={() =>
-                handleNavigatePage(
-                  '/team'
-                )
-              }
-              className={`nav-link ${
-                isActivePage('/team')
-                  ? 'text-blue-600 font-semibold'
-                  : ''
-              }`}
-            >
-              Team
-            </button>
-
-            {/* Contact */}
-            <button
-              onClick={() =>
-                handleNavigatePage(
-                  '/contact'
-                )
-              }
-              className={`nav-link ${
-                isActivePage('/contact')
-                  ? 'text-blue-600 font-semibold'
-                  : ''
-              }`}
-            >
-              Contact
-            </button>
-
-            {/* CTA */}
-            <button
-              onClick={() =>
-                handleNavigatePage(
-                  '/analyze'
-                )
-              }
-              className="primary-button"
-            >
-              Analyze CV
             </button>
 
           </div>
 
-          {/* =========================
-              Mobile Menu Button
-          ========================= */}
-          <button
-            onClick={() =>
-              setMobileOpen(
-                !mobileOpen
-              )
-            }
-            className="md:hidden p-2 rounded-xl hover:bg-slate-100 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-            aria-label="Toggle navigation menu"
-            aria-expanded={
-              mobileOpen
-            }
-            aria-controls="mobile-menu"
-          >
-
-            {mobileOpen ? (
-              <X className="w-6 h-6 text-slate-700" />
-            ) : (
-              <Menu className="w-6 h-6 text-slate-700" />
-            )}
-
-          </button>
-
         </div>
+
       </nav>
 
       {/* =========================
-          Mobile Overlay
-      ========================= */}
-      {mobileOpen && (
-        <div
-          className="fixed inset-0 bg-black/30 z-40 md:hidden"
-          onClick={() =>
-            setMobileOpen(false)
-          }
-          aria-hidden="true"
-        />
-      )}
-
-      {/* =========================
-          Mobile Navigation
+          Overlay Mobile
       ========================= */}
       <div
-        id="mobile-menu"
-        className={`fixed top-0 right-0 h-full w-[280px] bg-white z-50 shadow-2xl transform transition-transform duration-300 md:hidden ${
-          mobileOpen
-            ? 'translate-x-0'
-            : 'translate-x-full'
-        }`}
+        onClick={() =>
+          setMobileOpen(false)
+        }
+        className={`
+          fixed inset-0 bg-black/30 backdrop-blur-sm z-40 md:hidden
+          transition-all duration-300
+          ${
+            mobileOpen
+              ? 'opacity-100 visible'
+              : 'opacity-0 invisible'
+          }
+        `}
+      />
+
+      {/* =========================
+          Mobile Menu
+      ========================= */}
+      <div
+        className={`
+          fixed top-0 right-0 h-full w-[290px]
+          bg-white/80 backdrop-blur-2xl
+          border-l border-white/20
+          shadow-2xl z-50 md:hidden
+          transition-transform duration-300
+          ${
+            mobileOpen
+              ? 'translate-x-0'
+              : 'translate-x-full'
+          }
+        `}
       >
 
-        <div className="p-6 flex flex-col gap-5">
+        <div className="p-6 flex flex-col gap-3">
 
-          {/* Close Button */}
-          <div className="flex justify-end">
+          {/* Tombol Close */}
+          <div className="flex justify-end mb-3">
 
             <button
               onClick={() =>
                 setMobileOpen(false)
               }
-              className="p-2 rounded-xl hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-              aria-label="Close menu"
+              className="p-2 rounded-xl hover:bg-slate-100"
             >
 
               <X className="w-6 h-6 text-slate-700" />
@@ -309,71 +276,25 @@ export function Navbar() {
 
           </div>
 
-          {/* Navigation */}
+          {/* Menu Navigasi */}
+          {navLinks.map((item) => (
+            <button
+              key={item.label}
+              onClick={() =>
+                handleNavigate(item)
+              }
+              className="w-full text-left px-5 py-3 rounded-2xl text-slate-700 font-medium transition-all duration-300 hover:bg-blue-50 hover:text-blue-600"
+            >
+              {item.label}
+            </button>
+          ))}
+
+          {/* Tombol CTA */}
           <button
             onClick={() =>
-              handleNavigateSection(
-                'home'
-              )
+              navigate('/analyze')
             }
-            className="mobile-link"
-          >
-            Home
-          </button>
-
-          <button
-            onClick={() =>
-              handleNavigateSection(
-                'about'
-              )
-            }
-            className="mobile-link"
-          >
-            About
-          </button>
-
-          <button
-            onClick={() =>
-              handleNavigateSection(
-                'workflow'
-              )
-            }
-            className="mobile-link"
-          >
-            Workflow
-          </button>
-
-          <div className="w-full h-px bg-slate-200" />
-
-          <button
-            onClick={() =>
-              handleNavigatePage(
-                '/team'
-              )
-            }
-            className="mobile-link"
-          >
-            Team
-          </button>
-
-          <button
-            onClick={() =>
-              handleNavigatePage(
-                '/contact'
-              )
-            }
-            className="mobile-link"
-          >
-            Contact
-          </button>
-
-          <button
-            onClick={() =>
-              handleNavigatePage(
-                '/analyze'
-              )
-            }
-            className="primary-button w-full mt-2"
+            className="mt-4 w-full px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold shadow-lg shadow-blue-300/40 transition-all duration-300 hover:scale-[1.02]"
           >
             Analyze CV
           </button>

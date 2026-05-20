@@ -1,17 +1,9 @@
-import {
-  lazy,
-  Suspense,
-  useState,
-} from 'react';
-
-import {
-  Routes,
-  Route,
-  useNavigate,
-} from 'react-router-dom';
+import { lazy, Suspense, useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import { LoadingScreen } from './components/common/LoadingScreen';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
+import { ScrollToTop } from './components/common/ScrollToTop';
 
 const LandingPage = lazy(() =>
   import('./pages/LandingPage').then((module) => ({ default: module.LandingPage }))
@@ -44,6 +36,7 @@ function App() {
   return (
     <ErrorBoundary>
       <Suspense fallback={<LoadingScreen />}>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/team" element={<TeamPage />} />
