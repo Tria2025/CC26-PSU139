@@ -22,14 +22,11 @@ export function ContactSection() {
       agree: false,
     });
 
-  const [errors, setErrors] =
-    useState({});
+  const [errors, setErrors] = useState({});
 
-  const [success, setSuccess] =
-    useState('');
+  const [success, setSuccess] = useState('');
 
-  const [isLoading, setIsLoading] =
-    useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // =========================
   // HANDLE INPUT CHANGE
@@ -157,22 +154,34 @@ export function ContactSection() {
       id="contact"
       className="container-custom pt-10 pb-20"
     >
-      {/* HEADING */}
+      {/* =========================
+          HEADING
+      ========================= */}
       <div className="text-center mb-16">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-medium mb-5">
+        
+        <div
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-medium mb-5 animate-bounce-soft"
+          style={{ animationDelay: '0ms' }}
+        >
           <Sparkles className="w-4 h-4" />
-
           Contact CareerPath AI
         </div>
 
-        <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
+        <h2
+          className="text-4xl md:text-5xl font-bold text-slate-900 animate-bounce-soft"
+          style={{ animationDelay: '150ms' }}
+        >
           Hubungi Kami
         </h2>
 
-        <p className="mt-5 text-slate-600 text-lg max-w-3xl mx-auto leading-relaxed">
-          Apakah Anda memiliki pertanyaan atau masukan terkait platform CareerPath AI? Tim kami siap membantu
-          Anda dengan layanan profesional dan respons cepat.
+        <p
+          className="mt-5 text-slate-600 text-lg max-w-3xl mx-auto leading-relaxed animate-bounce-soft"
+          style={{ animationDelay: '300ms' }}
+        >
+          Apakah Anda memiliki pertanyaan atau masukan terkait platform CareerPath AI? 
+          Tim kami siap membantu Anda dengan layanan profesional dan respons cepat.
         </p>
+
       </div>
 
       {/* MAIN CONTENT */}
@@ -180,7 +189,10 @@ export function ContactSection() {
         {/* ========================= */}
         {/* LEFT SIDE */}
         {/* ========================= */}
-        <div className="relative overflow-hidden rounded-[32px] border border-white/30 bg-white/60 backdrop-blur-xl p-8 shadow-lg">
+        <div
+          className="animate-team-card relative overflow-hidden rounded-[32px] border border-white/30 bg-white/60 backdrop-blur-xl p-8 shadow-lg"
+          style={{ animationDelay: '450ms' }}
+        >
           {/* Glow */}
           <div className="absolute -top-16 -right-16 w-52 h-52 bg-blue-400/10 rounded-full blur-3xl" />
 
@@ -284,7 +296,10 @@ export function ContactSection() {
         {/* ========================= */}
         {/* RIGHT SIDE */}
         {/* ========================= */}
-        <div className="relative overflow-hidden rounded-[32px] border border-white/30 bg-white/60 backdrop-blur-xl p-8 shadow-lg">
+        <div
+          className="animate-team-card relative overflow-hidden rounded-[32px] border border-white/30 bg-white/60 backdrop-blur-xl p-8 shadow-lg"
+          style={{ animationDelay: '650ms' }}
+        >
           {/* Glow */}
           <div className="absolute -bottom-20 -left-20 w-56 h-56 bg-blue-400/10 rounded-full blur-3xl" />
 

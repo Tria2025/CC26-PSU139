@@ -65,32 +65,34 @@ const bottomMembers = [
   },
 ];
 
-function TeamCard({ member }) {
+function TeamCard({ 
+  member,
+  delay = 0, 
+}) {
   const initial =
     member.name.charAt(0).toUpperCase();
 
   return (
-    <div className="group relative overflow-hidden rounded-[32px] border border-white/30 bg-white/60 backdrop-blur-xl p-6 shadow-lg transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:bg-white/80 h-full">
+    <div
+      className="group animate-team-card relative overflow-hidden rounded-[32px] border border-white/30 bg-white/60 backdrop-blur-xl p-6 shadow-lg transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:bg-white/80 h-full"
+      style={{
+        animationDelay: `${delay}ms`,
+      }}
+    >
 
       {/* Glow Effect */}
       <div className="absolute -top-16 -right-16 w-44 h-44 bg-blue-400/10 rounded-full blur-3xl transition-all duration-500 group-hover:bg-blue-500/20" />
-
       <div className="relative z-10 flex flex-col h-full">
-
+        
         {/* Avatar Initial */}
         <div className="flex justify-center mb-6">
-
           <div className="w-32 h-32 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-xl border-4 border-white text-white text-5xl font-bold transition-all duration-500 group-hover:scale-105 group-hover:rotate-3">
-
             {initial}
-
           </div>
-
         </div>
 
         {/* Name */}
         <div className="text-center">
-
           <h3 className="text-2xl font-bold text-slate-900 leading-snug">
             {member.name}
           </h3>
@@ -98,20 +100,14 @@ function TeamCard({ member }) {
           <p className="text-sm text-slate-500 mt-2">
             ID: {member.id}
           </p>
-
         </div>
 
         {/* Role */}
         <div className="flex justify-center mt-5">
-
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-semibold">
-
             <BadgeCheck className="w-4 h-4" />
-
             {member.role}
-
           </span>
-
         </div>
 
         {/* Divider */}
@@ -119,26 +115,20 @@ function TeamCard({ member }) {
 
         {/* Info */}
         <div className="space-y-4 text-center flex-1">
-
           <div className="flex items-center justify-center gap-2 text-slate-700">
-
             <GraduationCap className="w-5 h-5 text-blue-600" />
-
             <span className="font-medium">
               {member.university}
             </span>
-
           </div>
 
           <p className="text-sm text-slate-500">
             {member.major}
           </p>
-
         </div>
 
         {/* Social */}
         <div className="flex items-center justify-center gap-4 mt-8">
-
           <a
             href={member.linkedin}
             target="_blank"
@@ -165,9 +155,7 @@ function TeamCard({ member }) {
           >
             <Instagram className="w-5 h-5" />
           </a>
-
         </div>
-
       </div>
     </div>
   );
@@ -175,62 +163,56 @@ function TeamCard({ member }) {
 
 export function TeamSection() {
   return (
-    <section
-      id="team"
-      className="container-custom pt-10 pb-20"
-    >
+    <section id="team" className="container-custom pt-10 pb-20">
 
       {/* Heading */}
       <div className="text-center mb-12">
-
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-medium mb-5">
-
+        <div
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-medium mb-5 animate-bounce-soft"
+          style={{ animationDelay: '0ms' }}
+        >
           <Sparkles className="w-4 h-4" />
-
           Team Developer CareerPath AI
-
         </div>
 
-        <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
+        <h2
+          className="text-4xl md:text-5xl font-bold text-slate-900 animate-bounce-soft"
+          style={{ animationDelay: '150ms' }}
+        >
           Tim Kami
         </h2>
 
-        <p className="mt-5 text-slate-600 text-lg max-w-2xl mx-auto">
-          Tim pengembang CareerPath AI
-          berbasis Artificial Intelligence
-          modern.
+        <p
+          className="mt-5 text-slate-600 text-lg max-w-2xl mx-auto animate-bounce-soft"
+          style={{ animationDelay: '300ms' }}
+        >
+          Tim pengembang CareerPath AI berbasis Artificial Intelligence modern.
         </p>
-
       </div>
 
       {/* TOP ROW */}
       <div className="flex justify-center mb-8">
-
         <div className="grid md:grid-cols-2 gap-8 w-full max-w-3xl">
-
-          {topMembers.map((member) => (
+          {topMembers.map((member, index) => (
             <TeamCard
               key={member.id}
               member={member}
+              delay={index * 180}
             />
           ))}
-
         </div>
-
       </div>
 
       {/* BOTTOM ROW */}
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-
-        {bottomMembers.map((member) => (
+        {bottomMembers.map((member, index) => (
           <TeamCard
             key={member.id}
             member={member}
+            delay={(index + 2) * 180}
           />
         ))}
-
       </div>
-
     </section>
   );
 }

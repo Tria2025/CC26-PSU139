@@ -10,7 +10,6 @@ import {
 
 import { analyzeCV } from '../../api/cvApi';
 import { Navbar } from '../layout/Navbar';
-
 import { Footer } from '../layout/Footer';
 
 const MAX_FILE_SIZE =
@@ -21,17 +20,13 @@ export function InputSection({
 }) {
   const navigate = useNavigate();
 
-  const [file, setFile] =
-    useState(null);
+  const [file, setFile] = useState(null);
 
-  const [loading, setLoading] =
-    useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const [error, setError] =
-    useState('');
+  const [error, setError] = useState('');
 
-  const [progress, setProgress] =
-    useState(0);
+  const [progress, setProgress] = useState(0);
 
   const handleFileChange = (e) => {
     const selected =
@@ -80,9 +75,7 @@ export function InputSection({
 
       try {
         setLoading(true);
-
         setError('');
-
         setProgress(0);
 
         const result =
@@ -111,34 +104,31 @@ export function InputSection({
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
-
       <Navbar />
-
       <main className="max-w-3xl mx-auto px-6 py-12 flex-1 w-full">
 
-        {/* BACK BUTTON */}
-        <button
-          onClick={() => navigate('/')}
-          className="mb-8 inline-flex items-center gap-2 text-slate-600 hover:text-blue-600 transition font-medium"
-          aria-label="Kembali ke beranda"
-        >
-          <ArrowLeft className="w-4 h-4" />
-
-          Kembali ke Beranda
-        </button>
+        <div className="mb-8 flex items-center gap-2 text-sm text-slate-500">
+          <button
+            onClick={() => navigate('/')}
+            className="transition hover:text-blue-600"
+          >
+            Home
+          </button>
+          <span>/</span>
+          <span className="font-medium text-slate-700">
+            Analyze CV
+          </span>
+        </div>
 
         {/* HEADING */}
         <div className="text-center mb-10">
-
           <h1 className="text-4xl font-bold mb-4">
             Upload CV Anda
           </h1>
 
           <p className="text-lg text-gray-600">
-            Upload CV PDF dan dapatkan
-            rekomendasi karier terbaik
+            Upload CV PDF dan dapatkan rekomendasi karier terbaik
           </p>
-
         </div>
 
         {/* CARD */}
@@ -146,11 +136,8 @@ export function InputSection({
 
           {/* LABEL */}
           <label className="block mb-4 font-medium">
-
             <FileText className="inline w-5 h-5 mr-2" />
-
             Upload File CV
-
           </label>
 
           {/* INPUT */}
@@ -186,21 +173,16 @@ export function InputSection({
               duration-300
             "
           >
-
             <Upload className="w-8 h-8 text-blue-600" />
-
             <span className="font-medium text-slate-700">
-
               {file
                 ? file.name
                 : 'Klik untuk upload PDF'}
-
             </span>
 
             <span className="text-sm text-gray-500">
               Maksimal ukuran file 5MB
             </span>
-
           </label>
 
           {/* ERROR */}
@@ -224,9 +206,7 @@ export function InputSection({
           {/* PROGRESS */}
           {loading && (
             <div className="mt-6">
-
               <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-
                 <div
                   className="
                     bg-blue-600
@@ -238,21 +218,16 @@ export function InputSection({
                     width: `${progress}%`,
                   }}
                 />
-
               </div>
 
               <div className="flex items-center justify-center gap-2 mt-3 text-sm text-gray-600">
-
                 <Loader2 className="w-4 h-4 animate-spin" />
-
                 <span>
                   Menganalisis CV...
                   {' '}
                   {progress}%
                 </span>
-
               </div>
-
             </div>
           )}
 
@@ -283,13 +258,9 @@ export function InputSection({
               ? 'Memproses...'
               : 'Analisis CV'}
           </button>
-
         </div>
-
       </main>
-
       <Footer />
-
     </div>
   );
 }
