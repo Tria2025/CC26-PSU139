@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const AI_SERVICE_URL = process.env.AI_SERVICE_URL || "https://terijuky-careerpathai.hf.space";
+const AI_SERVICE_URL = process.env.AI_SERVICE_URL;
 
 export const analyzeCVService = async (cvText) => {
   const response = await axios.post(
